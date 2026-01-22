@@ -1,7 +1,9 @@
 package com.example.stms;
 
 public enum Status {
-    PENDING, IN_PROGRESS, DONE;
+    PENDING("Task is pending"), 
+    IN_PROGRESS("Task in progress"), 
+    DONE("Task is completed");
 
     private String description;
 

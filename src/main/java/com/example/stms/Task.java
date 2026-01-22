@@ -17,4 +17,11 @@ public class Task {
     private String title;
     private String description;
     private Status status;
+      //ADD THIS METHOD
+    public String getStatusDescription() {
+        if (status == null) {
+            return null;
+        }
+        return status.getDescription();
+    }
 }
