@@ -24,7 +24,7 @@ public class TaskService {
     }
     public String deletTask(Integer id) {
         if(!task_repo.existsById(id)) {
-            throw new RuntimeException("Task not found with id: " + id);
+            throw new TaskNotFoundException(id);
         }
         task_repo.deleteById(id);
         return "Successfully removed";
@@ -32,7 +32,7 @@ public class TaskService {
    public Task updateTask(Integer id, Task updatedTask) {
 
     Task existingTask = task_repo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
+            .orElseThrow(() -> new TaskNotFoundException(id));
     existingTask.setStatus(updatedTask.getStatus());
 
     return task_repo.save(existingTask);

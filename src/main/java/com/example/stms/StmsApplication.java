@@ -17,37 +17,41 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @RequestMapping("/tasks")
-public class StmsApplication {
+public class StmsApplication extends RuntimeException {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StmsApplication.class, args);
 	}
 
-	//@Autowired
+	// @Autowired
 	private TaskService taskService;
+
 	public StmsApplication(TaskService taskService) {
 		this.taskService = taskService;
 	}
 
 	@GetMapping
-	public List<Task>getTasks() {
+	public List<Task> getTasks() {
 		return taskService.getAllTasks();
 	}
+
 	@GetMapping("/{id}")
 	public Optional<Task> getTask(@PathVariable Integer id) {
 		return taskService.getTask(id);
 	}
+
 	@PostMapping
 	public Task createTask(@RequestBody Task task) {
 		return taskService.createTask(task);
 	}
+
 	@PutMapping("/{id}")
-	public Task updateTask(@PathVariable Integer id,  @RequestBody Task task) {
+	public Task updateTask(@PathVariable Integer id, @RequestBody Task task) {
 		return taskService.updateTask(id, task);
 	}
+
 	@DeleteMapping("/{id}")
 	public String deleteTask(@PathVariable Integer id) {
 		return taskService.deletTask(id);
 	}
-
 }
