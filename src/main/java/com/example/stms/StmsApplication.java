@@ -1,8 +1,6 @@
 package com.example.stms;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +34,7 @@ public class StmsApplication extends RuntimeException {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Task> getTask(@PathVariable Integer id) {
+	public Task getTask(@PathVariable Integer id) {
 		return taskService.getTask(id);
 	}
 
@@ -51,7 +49,7 @@ public class StmsApplication extends RuntimeException {
 	}
 
 	@DeleteMapping("/{id}")
-	public String deleteTask(@PathVariable Integer id) {
-		return taskService.deletTask(id);
+	public void deleteTask(@PathVariable Integer id) {
+		taskService.deletTask(id);
 	}
 }

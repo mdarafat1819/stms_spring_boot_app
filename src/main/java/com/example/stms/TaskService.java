@@ -16,18 +16,19 @@ public class TaskService {
     public List<Task>getAllTasks() {
         return task_repo.findAll();
     }
-   public Optional<Task> getTask(Integer id) {
-        return task_repo.findById(id);
+   public Task getTask(Integer id) {
+        return task_repo.findById(id).orElseThrow(()->
+            new TaskNotFoundException(id)
+        );
     }
     public Task createTask(Task task) {
         return task_repo.save(task);
     }
-    public String deletTask(Integer id) {
+    public void deletTask(Integer id) {
         if(!task_repo.existsById(id)) {
             throw new TaskNotFoundException(id);
         }
         task_repo.deleteById(id);
-        return "Successfully removed";
     }
    public Task updateTask(Integer id, Task updatedTask) {
 
