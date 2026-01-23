@@ -20,10 +20,14 @@ public class Task {
     private Integer id;
     @NotBlank(message = "Title must not be empty")
     private String title;
+
     @NotBlank(message = "Description must not be empty")
     private String description;
+
     @NotNull(message = "Status must be PENDING, IN_PROGRESS or DONE")
+    @Enumerated(EnumType.STRING)
     private Status status;
+    
     public String getStatusDescription() {
         if (status == null) {
             return null;
