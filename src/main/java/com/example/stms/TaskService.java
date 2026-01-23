@@ -22,7 +22,7 @@ public class TaskService {
     public Task createTask(Task task) {
         return task_repo.save(task);
     }
-    public void deletTask(Integer id) {
+    public void deleteTask(Integer id) {
         if(!task_repo.existsById(id)) {
             throw new TaskNotFoundException(id);
         }
@@ -32,6 +32,8 @@ public class TaskService {
 
     Task existingTask = task_repo.findById(id)
             .orElseThrow(() -> new TaskNotFoundException(id));
+    existingTask.setTitle(updatedTask.getTitle());
+    existingTask.setDescription(updatedTask.getDescription());
     existingTask.setStatus(updatedTask.getStatus());
 
     return task_repo.save(existingTask);

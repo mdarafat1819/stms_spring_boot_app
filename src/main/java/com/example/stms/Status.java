@@ -11,7 +11,7 @@ public enum Status {
     Status(String description) {
         this.description = description;
     }
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 

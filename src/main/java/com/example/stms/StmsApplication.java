@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 @SpringBootApplication
 @RestController
 @RequestMapping("/tasks")
-public class StmsApplication extends RuntimeException {
+public class StmsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StmsApplication.class, args);
@@ -31,27 +31,29 @@ public class StmsApplication extends RuntimeException {
 	}
 
 	@GetMapping
-	public List<Task> getTasks() {
-		return taskService.getAllTasks();
+	public List<TaskResponse> getTasks() {
+		return taskService.getAllTasks().stream().map(TaskMapper::toResponse).toList();
 	}
 
 	@GetMapping("/{id}")
-	public Task getTask(@PathVariable Integer id) {
-		return taskService.getTask(id);
+	public TaskResponse getTask(@PathVariable Integer id) {
+		return TaskMapper.toResponse(taskService.getTask(id));
 	}
 
 	@PostMapping
-	public Task createTask(@Valid @RequestBody Task task) {
-		return taskService.createTask(task);
+	public TaskResponse createTask(@Valid @RequestBody TaskRequest request) {
+		Task task = TaskMapper.toEntity(request);
+		return TaskMapper.toResponse(taskService.createTask(task));
 	}
 
 	@PutMapping("/{id}")
-	public Task updateTask(@PathVariable Integer id, @RequestBody Task task) {
-		return taskService.updateTask(id, task);
+	public TaskResponse updateTask(@PathVariable Integer id, @Valid @RequestBody TaskRequest request) {
+		Task task = TaskMapper.toEntity(request);
+		return TaskMapper.toResponse(taskService.updateTask(id, task));
 	}
 
 	@DeleteMapping("/{id}")
 	public void deleteTask(@PathVariable Integer id) {
-		taskService.deletTask(id);
+		taskService.deleteTask(id);
 	}
 }
