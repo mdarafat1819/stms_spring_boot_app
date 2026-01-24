@@ -1,4 +1,4 @@
-package com.example.stms;
+package com.example.stms.dto;
 
 public class TaskResponse {
     private Integer id;

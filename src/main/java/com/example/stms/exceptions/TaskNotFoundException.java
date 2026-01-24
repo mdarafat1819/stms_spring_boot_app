@@ -1,4 +1,4 @@
-package com.example.stms;
+package com.example.stms.exceptions;
 
 public class TaskNotFoundException extends RuntimeException {
     public TaskNotFoundException(Integer id) {

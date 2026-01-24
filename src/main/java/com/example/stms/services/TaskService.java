@@ -1,42 +1,46 @@
-package com.example.stms;
+package com.example.stms.services;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+import com.example.stms.entity.Task;
+import com.example.stms.exceptions.TaskNotFoundException;
+import com.example.stms.repository.TaskRepository;
+
 @Service
 public class TaskService {
    // @Autowired
-    private TaskRepository task_repo;
+    private TaskRepository taskRepo;
     public TaskService(TaskRepository taskRepo) {
-        task_repo = taskRepo;
+        this.taskRepo = taskRepo;
     }
 
     public List<Task>getAllTasks() {
-        return task_repo.findAll();
+        return taskRepo.findAll();
     }
    public Task getTask(Integer id) {
-        return task_repo.findById(id).orElseThrow(()->
+        return taskRepo.findById(id).orElseThrow(()->
             new TaskNotFoundException(id)
         );
     }
     public Task createTask(Task task) {
-        return task_repo.save(task);
+        return taskRepo.save(task);
     }
     public void deleteTask(Integer id) {
-        if(!task_repo.existsById(id)) {
+        if(!taskRepo.existsById(id)) {
             throw new TaskNotFoundException(id);
         }
-        task_repo.deleteById(id);
+        taskRepo.deleteById(id);
     }
    public Task updateTask(Integer id, Task updatedTask) {
 
-    Task existingTask = task_repo.findById(id)
+    Task existingTask = taskRepo.findById(id)
             .orElseThrow(() -> new TaskNotFoundException(id));
     existingTask.setTitle(updatedTask.getTitle());
     existingTask.setDescription(updatedTask.getDescription());
     existingTask.setStatus(updatedTask.getStatus());
 
-    return task_repo.save(existingTask);
+    return taskRepo.save(existingTask);
 }
 
 }

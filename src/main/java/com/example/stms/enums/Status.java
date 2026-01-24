@@ -1,4 +1,4 @@
-package com.example.stms;
+package com.example.stms.enums;
 
 public enum Status {
     PENDING("Task is pending"), 

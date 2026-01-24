@@ -1,4 +1,4 @@
-package com.example.stms;
+package com.example.stms.exceptions;
 
 import java.time.LocalDateTime;
 

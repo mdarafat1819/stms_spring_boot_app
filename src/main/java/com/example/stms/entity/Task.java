@@ -1,4 +1,6 @@
-package com.example.stms;
+package com.example.stms.entity;
+
+import com.example.stms.enums.Status;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

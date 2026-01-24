@@ -1,4 +1,6 @@
-package com.example.stms;
+package com.example.stms.dto;
+
+import com.example.stms.enums.Status;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

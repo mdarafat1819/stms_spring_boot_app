@@ -1,4 +1,8 @@
-package com.example.stms;
+package com.example.stms.mapper;
+
+import com.example.stms.dto.TaskRequest;
+import com.example.stms.dto.TaskResponse;
+import com.example.stms.entity.Task;
 
 public class TaskMapper {
     public static Task toEntity(TaskRequest request) {
